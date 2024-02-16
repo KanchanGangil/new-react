@@ -1,14 +1,37 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+// alert for msg in react
+import { positions, transitions, Provider as Alertprovider } from 'react-alert';
+import AlertTemplate from "react-alert-template-basic";
+
+const options = {
+  timeout: 5000,
+  position: positions.TOP_CENTER,
+  transitions: transitions.SCALE,
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+
+  // redux react connect
+  <Provider store={store}>
+    <BrowserRouter>
+      {/* for msg alert */}
+      <Alertprovider template={AlertTemplate}{...options}>
+        <App />
+      </Alertprovider>
+    </BrowserRouter>
+  </Provider>
+
+
+
+
 );
 
 // If you want to start measuring performance in your app, pass a function
